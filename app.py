@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import openai
+import os
 
 
 app = Flask(__name__)
@@ -33,8 +34,12 @@ def app_response():
     # return render_template("home.html", message=history)
     return answer
 
-openai.api_key = open("/workspaces/codespace/textbook.txt").read()
-
+openai.api_key = os.getenv("OPENAI_API_KEY")
+if openai.api_key == None:
+  print("OPENAI api key not found!")
+  openai.api_key = input("Input manually: ")
+#do export = (uropenaikey)
+#or if on windows, update your system environment variables
 
 def get_response(question):
   global messagehistory
