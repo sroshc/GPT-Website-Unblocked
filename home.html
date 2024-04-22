@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Schoology</title>
+  <link rel="icon" href="http://example.com/favicon.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #000000;
+    }
+    .title  {
+      font-family: Impact, fantasy;
+      color: #ffffff;
+      text-align : center;
+      font-size: 40px;
+    }
+    .chat-container {
+      max-width: 1000; /* Increased the max-width */
+      margin: auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .chat-box {
+      padding: 20px;
+    }
+    .user-message { background-color: #595358; 
+      color: white; 
+      margin-bottom: 10px; 
+      margin-left: 20%; /* Adjust this to control space from left side */ 
+      padding: 10px;
+       border-radius: 5px; 
+       text-align: right; 
+       width: 60%; /* Adjust this to control width of box */ 
+       margin-left: auto; 
+    }
+    .assistant-message {
+      background-color: #87dd68;
+      margin-bottom: 10px;
+      max-width: 60%;
+      padding: 10px;
+      position: right;
+      border-radius: 5px; 
+
+    }
+    form {
+        margin-top :20px; 
+        text-align:right; 
+        display:flex; 
+        justify-content:flex-end;}
+
+    
+     textarea{
+       width :100%;
+       padding :8px; 
+       border:none; 
+       border-radius :5px;}
+
+     input[type="submit"]{
+       background-color:#87dd68; 
+       color:white; 
+       padding :8px; 
+       border:none; 
+       cursor:pointer;}
+
+     input[type="submit"]:hover{
+         background-color:#178a07;} 
+
+  
+</style>
+</head>
+<body>
+<div class = "title="""><header class = "title"><b>Totally Not Ai</b></header><div>
+<div class="chat-container">
+<div class="chat-box">
+{% block content %}
+
+
+{% if submitted_text %}
+<div class="user-message">Your question is {{ submitted_text }}</div>
+<div class="assistant-message">Answer : {{message}}</div>
+
+{% endif %}
+
+{% for question, answer in message %}
+<div class="user-message">{{ question }}</div>
+<div class="assistant-message">GPT 4 <br> {{ answer }}</div>
+{% endfor %}
+
+<form id="questionForm" action="/" method="post">
+<textarea id = "textbox" name = "textbox" placeholder = "Type your question here..." rows = "3"></textarea><br/>
+<input type = "submit" value = "Send">
+</form>
+
+<script>
+document.getElementById('questionForm').addEventListener('submit', function(e) {
+e.preventDefault(); // Prevents default form submission
+});
+document.getElementById('textbox').addEventListener('keypress', function(e) {
+if (e.key === 'Enter' && !e.shiftKey) {
+document.getElementById('questionForm').submit(); // Submit form on Enter press
+}
+});
+</script>
+
+{% endblock %}
+</div>
+</div>
+
+</body>
+</html>
