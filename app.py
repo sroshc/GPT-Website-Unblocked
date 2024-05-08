@@ -38,7 +38,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 if openai.api_key == None:
   print("OPENAI api key not found!")
   openai.api_key = input("Input manually: ")
-#do export = (uropenaikey)
+#do export = (uropenaikey), or edit bashrc file
 #or if on windows, update your system environment variables
 
 def get_response(question):
