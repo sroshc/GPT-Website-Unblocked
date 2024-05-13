@@ -46,7 +46,7 @@ def get_response(question):
   messagehistory =  messagehistory + [{"role": "user", "content": question}] 
   response = openai.chat.completions.create(
     model="gpt-4",
-    messages= instructions + messagehistory,
+    messages = messagehistory, # add "+ instructions" to the end of this line to add instructions
     temperature=1,
     max_tokens=512,
     top_p=1,
